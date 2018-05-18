@@ -9,11 +9,12 @@ namespace EmlakYonetim
 {
     public class DAL
     {
+        OleDbConnection connection = new OleDbConnection(Connection.GetConnection());
         public int InsertSQL(string pTableName, Parameters[] prm)
         {
             string sqlQuery = "INSERT INTO " + pTableName + " (";
 
-            OleDbConnection connection = new OleDbConnection(Connection.GetConnection());
+           
             connection.Open();
             
             for (int i = 0; i < prm.Length; i++)
@@ -61,8 +62,6 @@ namespace EmlakYonetim
         public int UpdateSQL(string pTableName, Parameters[] prm, string whereColumnName, int whereColumnIDValue)
         {
             string sqlQuery = "UPDATE " + pTableName + " SET ";
-
-            OleDbConnection connection = new OleDbConnection(Connection.GetConnection());
             connection.Open();
 
             for (int i = 0; i < prm.Length; i++)
@@ -104,7 +103,6 @@ namespace EmlakYonetim
         {
             string sqlQuery = "DELETE FROM " + pTableName + " WHERE " + whereColumnName + " = " + whereColumnIDValue;
 
-            OleDbConnection connection = new OleDbConnection(Connection.GetConnection());
             connection.Open();
             OleDbCommand query = new OleDbCommand(sqlQuery, connection);
 
